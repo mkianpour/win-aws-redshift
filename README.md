@@ -11,16 +11,16 @@ Windows 2012 - All flavours
 
 <table>
   <tr>
-    <th>Database</th>
-    <th>String</th>
-    <th>Redshift Database Name</th>
-    <th>dev</th>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
   </tr>
   <tr>
     <td><tt>['win-redshift']['database']</tt></td>
     <td>String</td>
-    <td>whether to include database</td>
-    <td><tt>true</tt></td>
+    <td>Redshift Database Name</td>
+    <td><tt>dev</tt></td>
   </tr>
 </table>
 
