@@ -12,4 +12,4 @@ default['win-redshift']['port'] = '5439'  # Must be a string
 default['win-redshift']['database'] = 'dev'
 default['win-redshift']['uid'] = "masteruser"
 default['win-redshift']['pwd'] = "changeme"
-default['win-redshift']['charset'] = 'utf8'
+default['win-redshift']['sslmode'] = "prefer"
