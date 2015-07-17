@@ -25,7 +25,7 @@ Windows 2012 - All flavours
   <tr>
     <td><tt>['win-redshift']['dsn']['server']</tt></td>
     <td>String</td>
-    <td>Redshift cluster endpoint address</td>
+    <td>Redshift cluster address</td>
     <td><tt>REPLACEME</tt></td>
   </tr>
   <tr>
