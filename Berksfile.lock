@@ -1,0 +1,13 @@
+DEPENDENCIES
+  win-redshift
+    path: .
+    metadata: true
+  windows (~> 1.37.0)
+
+GRAPH
+  apt (2.7.0)
+  chef_handler (1.2.0)
+  win-redshift (0.1.0)
+    apt (>= 0.0.0)
+  windows (1.37.0)
+    chef_handler (>= 0.0.0)
