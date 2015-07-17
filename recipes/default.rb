@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-dsn = node['win-redshift']['dsn']
+dsn = node['win-redshift']
 
 case node['platform']
 when 'windows'
@@ -35,7 +35,7 @@ when 'windows'
 
   if windows_version.windows_server_2012_r2? || windows_version.windows_server_2012?
     powershell_script 'config_default_redshift_dsn' do
-      code 'C:/tmp/odbc-dsn.ps1'
+      code 'C:/tmp/odbc-dsn.ps1 ' + dsn['name']
     end
   else
     log 'this cookbook is only for win2012 flavours' do
