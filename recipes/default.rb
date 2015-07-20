@@ -35,10 +35,14 @@ when 'windows'
 
   if windows_version.windows_server_2012_r2? || windows_version.windows_server_2012?
     powershell_script 'config_default_redshift_dsn' do
-      code 'C:/tmp/odbc-dsn.ps1' + Padder.pad(dsn['name']) + \
-           Padder.pad(dsn['server']) + Padder.pad(dsn['port']) + \
-           Padder.pad(dsn['database']) + Padder.pad(dsn['uid']) + \
-           Padder.pad(dsn['pwd']) + Padder.pad(dsn['sslmode'])
+      dsnstr = nil
+      dsnarr = [
+        dsn['name'], dsn['server'], dsn['port'], dsn['database'],
+        dsn['uid'], dsn['pwd'], dsn['sslmode']]
+      dsnarr.each do |dsnp|
+        dsnstr = dsnstr.to_s + Padder.pad(dsnp)
+      end
+      code 'C:/tmp/odbc-dsn.ps1' + dsnstr
     end
   else
     log 'this cookbook is only for win2012 flavours' do
