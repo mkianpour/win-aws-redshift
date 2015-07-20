@@ -38,7 +38,8 @@ when 'windows'
       dsnstr = nil
       dsnarr = [
         dsn['name'], dsn['server'], dsn['port'], dsn['database'],
-        dsn['uid'], dsn['pwd'], dsn['sslmode']]
+        dsn['uid'], dsn['pwd'], dsn['sslmode']
+      ]
       dsnarr.each do |x|
         dsnstr = dsnstr.to_s + ' ' + x
       end
