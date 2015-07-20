@@ -39,8 +39,8 @@ when 'windows'
       dsnarr = [
         dsn['name'], dsn['server'], dsn['port'], dsn['database'],
         dsn['uid'], dsn['pwd'], dsn['sslmode']]
-      dsnarr.each do |dsnp|
-        dsnstr = dsnstr.to_s + Padder.pad(dsnp)
+      dsnarr.each do |x|
+        dsnstr = dsnstr.to_s + ' ' + x
       end
       code 'C:/tmp/odbc-dsn.ps1' + dsnstr
     end
