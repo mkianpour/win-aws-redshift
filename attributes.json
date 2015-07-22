@@ -1,0 +1,20 @@
+{
+  "run_list": [ "recipe[win-redshift]" ]
+  // "unitt_base": {
+  //   "s3": {
+  //     "aws_access_key_id": "",
+  //     "aws_secret_access_key": "",
+  //     "bucket": "REPLACEME",
+  //     "files": [
+  //       {
+  //         "local_path": "/tmp/file1.zip",
+  //         "s3_path": "/file1.zip"
+  //       },
+  //       {
+  //         "local_path": "/tmp/file2.txt",
+  //         "s3_path": "/file2.txt"
+  //       }
+  //     ]
+  //   }
+  // }
+}
