@@ -1,0 +1,53 @@
+{
+  "variables": {
+    "NAME": "win-redshift",
+    "TIMESTAMP": "{{isotime}}",
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "eu-west-1",
+      "source_ami": "ami-c1740ab6",
+      "instance_type": "m3.medium",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "ami_name": "{{user `NAME`}} {{user `TIMESTAMP` | clean_ami_name}}",
+      "tags": {
+        "Name": "win-redshift"
+      },
+      "user_data_file": "{{pwd}}/scripts/setup_winrm.txt"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "inline": [
+        "mkdir C:\\chef"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "$url = \"http://www.confusedbycode.com/curl/curl-7.40.0-win64.msi\"",
+        "$output = \"C:\\Windows\\Temp\\curl.msi\"",
+        "$browser = New-Object System.Net.WebClient",
+        "$browser.DownloadFile($url, $output)",
+        "Start-Process \"C:\\Windows\\Temp\\curl.msi\" /qn -Wait"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "{{pwd}}/cookbooks",
+      "destination": "C:\\chef\\cookbooks"
+    },
+    {
+      "type": "file",
+      "source": "{{pwd}}/attributes.json",
+      "destination": "C:\\Windows\\Temp\\attributes.json"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
-*.exe
-*.msi
-*.msu
+/cookbooks
+.env.test
+.env
+env_export.sh
