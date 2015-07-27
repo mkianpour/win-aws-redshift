@@ -29,6 +29,9 @@ when 'windows'
   require 'chef/win32/version'
   windows_version = Chef::ReservedNames::Win32::Version.new
 
+  directory 'C:/chef' do
+    action :create
+  end
   cookbook_file 'C:/chef/odbc-dsn.ps1' do
     source 'odbc-dsn.ps1'
   end
