@@ -3,7 +3,9 @@
     "NAME": "win-redshift",
     "TIMESTAMP": "{{isotime}}",
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "ADMIN_NAME": "{{env `ADMIN_NAME`}}",
+    "ADMIN_PWD": "{{env `ADMIN_PWD`}}"
   },
   "builders": [
     {
@@ -26,18 +28,26 @@
     {
       "type": "powershell",
       "inline": [
-        "mkdir C:\\chef"
+        "mkdir C:\\chef",
+        "mkdir C:\\chef\\cookbooks"
       ]
     },
     {
       "type": "powershell",
       "inline": [
-        "$url = \"http://www.confusedbycode.com/curl/curl-7.40.0-win64.msi\"",
-        "$output = \"C:\\Windows\\Temp\\curl.msi\"",
-        "$browser = New-Object System.Net.WebClient",
-        "$browser.DownloadFile($url, $output)",
-        "Start-Process \"C:\\Windows\\Temp\\curl.msi\" /qn -Wait"
+        "net user {{user `ADMIN_NAME`}} {{user `ADMIN_PWD`}} /add",
+        "net localgroup Administrators {{user `ADMIN_NAME`}} /add"
       ]
+    },
+    {
+      "type": "windows-shell",
+      "scripts": [
+        "./scripts/chef.bat",
+        "./scripts/disable-auto-logon.bat"
+      ]
+    },
+    {
+      "type": "windows-restart"
     },
     {
       "type": "file",
@@ -46,8 +56,19 @@
     },
     {
       "type": "file",
+      "source": "{{pwd}}/solo.rb",
+      "destination": "C:\\chef\\solo.rb"
+    },
+    {
+      "type": "file",
       "source": "{{pwd}}/attributes.json",
-      "destination": "C:\\Windows\\Temp\\attributes.json"
+      "destination": "C:\\chef\\attributes.json"
+    },
+    {
+      "type": "windows-shell",
+      "inline": [
+        "chef-solo -c C:\\chef\\solo.rb -j C:\\chef\\attributes.json"
+      ]
     }
   ]
 }

@@ -29,7 +29,7 @@ when 'windows'
   require 'chef/win32/version'
   windows_version = Chef::ReservedNames::Win32::Version.new
 
-  cookbook_file 'C:/tmp/odbc-dsn.ps1' do
+  cookbook_file 'C:/chef/odbc-dsn.ps1' do
     source 'odbc-dsn.ps1'
   end
 
@@ -43,7 +43,7 @@ when 'windows'
       dsnarr.each do |x|
         dsnstr = dsnstr.to_s + ' ' + x
       end
-      code 'C:/tmp/odbc-dsn.ps1' + dsnstr
+      code 'C:/chef/odbc-dsn.ps1' + dsnstr
     end
   else
     log 'this cookbook is only for win2012 flavours' do
