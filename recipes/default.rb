@@ -14,13 +14,13 @@ when 'windows'
   include_recipe 'windows'
   if node['kernel']['machine'] == 'x86_64'
     windows_package 'Amazon Redshift ODBC Driver' do
-      source 'https://s3.amazonaws.com/redshift-downloads/drivers/AmazonRedshiftODBC64-1.2.1.1001.msi'
+      source dsn['redshift64-url']
       installer_type :msi
       action :install
     end
   else
     windows_package 'Amazon Redshift ODBC Driver' do
-      source 'https://s3.amazonaws.com/redshift-downloads/drivers/AmazonRedshiftODBC32-1.2.1.1001.msi'
+      source dsn['redshift-url']
       installer_type :msi
       action :install
     end
