@@ -13,3 +13,5 @@ default['win-redshift']['database'] = "dev"
 default['win-redshift']['uid'] = "masteruser"
 default['win-redshift']['pwd'] = "changeme"
 default['win-redshift']['sslmode'] = "prefer"
+default['win-redshift']['redshift-url'] = 'https://s3.amazonaws.com/redshift-downloads/drivers/AmazonRedshiftODBC32-1.2.1.1001.msi'
+default['win-redshift']['redshift64-url'] = 'https://s3.amazonaws.com/redshift-downloads/drivers/AmazonRedshiftODBC64-1.2.1.1001.msi'
