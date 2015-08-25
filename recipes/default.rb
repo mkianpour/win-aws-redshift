@@ -38,7 +38,6 @@ when 'windows'
 
   if windows_version.windows_server_2012_r2? || windows_version.windows_server_2012?
     powershell_script 'config_default_redshift_dsn' do
-      dsnstr = nil
       dsnarr = [
         dsn['name'], dsn['server'], dsn['port'], dsn['database'],
         dsn['uid'], dsn['pwd'], dsn['sslmode']
